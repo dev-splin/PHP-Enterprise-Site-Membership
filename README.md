@@ -13,18 +13,20 @@
 #### 사용자
 
 1. 회원가입
+
    - 이메일 인증 적용
+
    - (최소입력필드) 이메일 , 이름, 전화번호, 생년월일, 패스워드
       (If Possible) 프로필 사진 (이미지 업로드)
    - 패스워드 복잡성 적용
    - 입력 항목 실시간 validation 적용
 
-1. 로그인  , 로그인 유지 기능
-2. 로그아웃
-3. 개인 정보 확인/ 수정
-4. 패스워드 변경은 별도 구현 ( 변경전 email을 통한 인증번호  검증 프로세스 적용)
-5. 회원탈퇴 ( email을 통한 인증번호  검증 프로세스 적용 )
-6. 로그인, 로그아웃 기록(로그)
+2. 로그인  , 로그인 유지 기능
+3. 로그아웃
+4. 개인 정보 확인/ 수정
+5. 패스워드 변경은 별도 구현 ( 변경전 email을 통한 인증번호  검증 프로세스 적용)
+6. 회원탈퇴 ( email을 통한 인증번호  검증 프로세스 적용 )
+7. 로그인, 로그아웃 기록(로그)
 
 
 
@@ -51,3 +53,30 @@
 
 - 패스워드 : DB에 단방향 암호화하여 저장
 - 전화번호 : 양방향 암호화 저장하여 저장
+
+
+
+### Flow Chart
+
+#### 사용자
+
+<img src="https://user-images.githubusercontent.com/79291114/126042373-4ee38f61-982a-463e-abfe-e6d24a1d6ab0.png" alt="UserFlow" style="zoom: 67%;" />
+
+
+
+#### 관리자
+
+<img src="https://user-images.githubusercontent.com/79291114/126042369-8e687a45-ad0c-416c-84d8-7d4881849e82.png" alt="AdminFlow" style="zoom:67%;" />
+
+
+
+### 데이터 베이스 설계도
+
+![DB-blueprint_white](https://user-images.githubusercontent.com/79291114/126042368-54011367-4ae2-4930-bac7-13698757bbec.png)
+
+
+
+### WBS(Work Breakdown Structure)
+
+![WBS](https://user-images.githubusercontent.com/79291114/126042378-bd1292af-a45f-4acc-9b55-9d875e03f733.PNG)
+
