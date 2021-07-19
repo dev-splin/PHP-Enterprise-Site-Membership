@@ -14,9 +14,10 @@ CREATE TABLE member (
     FOREIGN KEY(stat_idx) REFERENCES state (stat_idx)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- NORMAL : 일반, INACTIVE : 휴면, BLOCK : 블락, MEMBER_OUT : 회원탈퇴
 CREATE TABLE state (
     stat_idx INT NOT NULL AUTO_INCREMENT COMMENT '상태 정보 인덱스',
-    stat_name VARCHAR(15) NOT NULL DEFAULT 'NORMAL' COMMENT '상태 정보 이름',
+    stat_name VARCHAR(15) NOT NULL DEFAULT 'NORMAL' COMMENT '상태 정보 이름', 
     PRIMARY KEY(stat_idx)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
