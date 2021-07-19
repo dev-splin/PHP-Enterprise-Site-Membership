@@ -33,8 +33,8 @@
                         <!-- Password input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="password" type="text" placeholder="Enter your password" data-sb-validations="required" />
-                            <label for="name">Password</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            <label for="password">Password</label>
+                            <div class="invalid-feedback" data-sb-feedback="password:required">A password is required.</div>
                         </div>
 
                         <!-- Name input-->
