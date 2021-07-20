@@ -72,7 +72,7 @@
 
 ### 데이터 베이스 설계도
 
-![DB-blueprint_white](https://user-images.githubusercontent.com/79291114/126042368-54011367-4ae2-4930-bac7-13698757bbec.png)
+![DB-blueprint_white](https://user-images.githubusercontent.com/79291114/126338935-595f150f-f47a-4b5e-880c-8ef343727572.png)
 
 
 
