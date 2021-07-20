@@ -9,6 +9,7 @@ class MainController extends Controller
 {
     public function index() {
         $admin = admin::all();
+
         return view('Main',[
             'admin' => $admin
         ]);

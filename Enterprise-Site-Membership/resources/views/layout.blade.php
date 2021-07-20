@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -33,5 +34,6 @@
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.esm.js"></script>
 <script src="js/sb-forms-0.4.1.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
 </body>
 </html>
