@@ -16,4 +16,11 @@ use App\Http\Controllers\CreateMemberController;
 */
 
 Route::get('/', [MainController::class, 'index' ]);
-Route::get('/create-member', [CreateMemberController::class, 'index' ]);
+
+Route::prefix('/create-member')->group(function () {
+    Route::get('/', [CreateMemberController::class, 'index' ]);
+    Route::post('/check-email', [CreateMemberController::class, 'checkEmail']);
+    Route::post('/', [CreateMemberController::class, 'create']);
+});
+
+

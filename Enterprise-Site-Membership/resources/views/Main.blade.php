@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <header class="py-5">
         <div class="container px-lg-5">
             <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
