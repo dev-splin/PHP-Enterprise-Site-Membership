@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\member\CreateMemberController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\CreateMemberController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

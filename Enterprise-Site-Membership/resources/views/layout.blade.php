@@ -8,10 +8,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
+    <!-- Core theme JS-->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap/bootstrap.js"></script>
+    <script src="js/bootstrap/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap/bootstrap.esm.js"></script>
+    <script src="js/bootstrap/sb-forms-0.4.1.js"></script>
+
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/bootstrap.css" rel="stylesheet" />
+
+    @yield('script')
 </head>
 <body>
+
+
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-lg-5">
@@ -27,13 +38,10 @@
     </div>
 </nav>
 
+
+
 @yield('content')
 
-<!-- Core theme JS-->
-<script src="js/bootstrap.js"></script>
-<script src="js/bootstrap.bundle.js"></script>
-<script src="js/bootstrap.esm.js"></script>
-<script src="js/sb-forms-0.4.1.js"></script>
-<script src="js/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>

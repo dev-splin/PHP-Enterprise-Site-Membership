@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\member;
 
+use App\Http\Controllers\Controller;
 use App\Models\member;
 use Illuminate\Http\Request;
 
 class CreateMemberController extends Controller
 {
     public function index() {
-        return view('CreateMemberTest');
+        return view('member/CreateMember');
     }
 
     public function checkEmail() {

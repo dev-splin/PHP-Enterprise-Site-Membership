@@ -1,8 +1,13 @@
-@extends('layout')
+@extends('Layout')
 
 @section('title')
     CreateMemberTest
+@endsection
 
+@section('script')
+<script src="{{ asset("js/member/MemberCreateManage.js") }}"></script>
+<script src="{{ asset("js/member/MemberInfoLength.js") }}"></script>
+<script src="{{ asset("js/member/MemberInfoRegex.js") }}"></script>
 
 @endsection
 
@@ -23,8 +28,9 @@
                         @csrf
                         <!-- Email-->
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control @error('email') border-danger @enderror" id="email" name="email" placeholder="name@example.com" oninput="checkEmail()" required value="{{old('email') ? old('email') : ''}}">
+                            <input type="email" class="form-control @error('email') border-danger @enderror" id="email" name="email" placeholder="name@example.com" required value="{{old('email') ? old('email') : ''}}">
                             <label for="email">Email</label>
+                            <small class="text-dark" disabled="disabled" id="emailSmallText"></small>
                             @error('email')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -86,30 +92,12 @@
     </section>
 
     <script>
-        //아이디 체크하여 가입버튼 비활성화, 중복확인.
-        function checkEmail() {
-            var inputed = $("#email").val();
 
-            console.log(inputed);
+        $(document).ready(function(){
+            inputCheckEmail($("#email"),$("#emailSmallText"),emailRegex,emailLength);
+        });
 
-            $.ajax({
-                type : 'POST',
-                data : {
-                    "_token": "{{ csrf_token() }}",
-                    email : inputed
-                },
-                url : "/create-member/check-email",
-                success : function(data) {
-                    if(inputed=="" && data=='0') {
-                        $("#email").addClass("border-primary")
-                    } else if (data == '0') {
-                        $("#email").addClass("border-success")
-                    } else if (data == '1') {
-                        $("#email").addClass("border-danger")
-                    }
-                }
-            });
-        }
     </script>
 
 @endsection
+
