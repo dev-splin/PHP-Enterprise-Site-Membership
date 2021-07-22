@@ -16,7 +16,7 @@
     <script src="js/bootstrap/sb-forms-0.4.1.js"></script>
 
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
 
     @yield('script')
 </head>

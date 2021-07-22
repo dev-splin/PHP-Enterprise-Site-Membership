@@ -5,6 +5,7 @@ namespace App\Http\Controllers\member;
 use App\Http\Controllers\Controller;
 use App\Models\member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class CreateMemberController extends Controller
 {
@@ -32,7 +33,7 @@ class CreateMemberController extends Controller
 
         $member = new member;
         $member->mem_email = request('email');
-        $member->mem_pw = request('password');
+        $member->mem_pw = Crypt::encryptString(request('password'));
         $member->mem_name = request('name');
         $member->mem_tel = request('tel');
         $member->mem_birth = request('birth');

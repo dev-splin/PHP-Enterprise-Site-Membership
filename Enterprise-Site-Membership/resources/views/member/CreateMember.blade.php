@@ -7,7 +7,11 @@
 @section('script')
 <script src="{{ asset("js/member/MemberCreateManage.js") }}"></script>
 <script src="{{ asset("js/member/MemberInfoLength.js") }}"></script>
-<script src="{{ asset("js/member/MemberInfoRegex.js") }}"></script>
+<script src="{{ asset("js/member/MemberInputInfo.js") }}"></script>
+
+<script src="js/daterangepicker/daterangepicker.min.js"></script>
+<script src="js/daterangepicker/moment.min.js"></script>
+<link href="css/daterangepicker/daterangepicker.css" rel="stylesheet"/>
 
 @endsection
 
@@ -28,7 +32,7 @@
                         @csrf
                         <!-- Email-->
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control @error('email') border-danger @enderror" id="email" name="email" placeholder="name@example.com" required value="{{old('email') ? old('email') : ''}}">
+                            <input type="email" class="form-control @error('email') border-danger @enderror" id="email" name="email" placeholder="name@example.com" value="{{old('email') ? old('email') : ''}}" required>
                             <label for="email">Email</label>
                             <small class="text-dark" disabled="disabled" id="emailSmallText"></small>
                             @error('email')
@@ -38,26 +42,26 @@
 
                         <!-- Password -->
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control @error('password') border-danger @enderror" id="password" name="password" placeholder="Password" required value="{{old('password') ? old('password') : ''}}">
+                            <input type="password" class="form-control @error('password') border-danger @enderror" id="password" name="password" placeholder="Password" value="{{old('password') ? old('password') : ''}}" required>
                             <label for="password">Password</label>
+                            <small class="text-dark" disabled="disabled" id="passwordSmallText"></small>
                             @error('password')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
 
-                        <!-- CheckPassword -->
+                        <!-- Check Password -->
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control @error('checkPassword') border-danger @enderror" id="checkPassword" name="checkPassword" placeholder="CheckPassword" required value="{{old('checkPassword') ? old('checkPassword') : ''}}">
+                            <input type="password" class="form-control" id="checkPassword" name="checkPassword" placeholder="Check Password" required>
                             <label for="checkPassword">CheckPassword</label>
-                            @error('checkpassword')
-                            <small class="text-danger">{{$message}}</small>
-                            @enderror
+                            <small class="text-dark" disabled="disabled" id="checkPasswordSmallText"></small>
                         </div>
 
                         <!-- Name -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control @error('name') border-danger @enderror" id="name" name="name" placeholder="Name" required value="{{old('name') ? old('name') : ''}}">
                             <label for="name">Name</label>
+                            <small class="text-dark" disabled="disabled" id="nameSmallText"></small>
                             @error('name')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -67,6 +71,7 @@
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control @error('tel') border-danger @enderror" id="tel" name="tel" placeholder="010-1234-5678" required value="{{old('tel') ? old('tel') : ''}}">
                             <label for="tel">Tel</label>
+                            <small class="text-dark" disabled="disabled" id="telSmallText"></small>
                             @error('tel')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -94,7 +99,81 @@
     <script>
 
         $(document).ready(function(){
-            inputCheckEmail($("#email"),$("#emailSmallText"),emailRegex,emailLength);
+            makeKeycodeSet();
+
+            emailId = $("#email");
+            passwordId = $("#password");
+            checkPasswordId = $("#checkPassword");
+            nameId = $("#name");
+            telId = $("#tel");
+
+            // 여기 부터 유효성 검사, 입력 방지
+            // Email
+            let isEmailCheckComplete = false;
+
+            exceptionInput(emailId, emailKeyCodeSet);
+
+            emailId.bind("focusin keyup", function (e) {
+                isEmailCheckComplete = checkInput(emailId,$("#emailSmallText"),emailRegex,emailLength);
+            });
+
+            emailId.focusout(function () {
+                if(isEmailCheckComplete) {
+                    checkInputEmail(email,$("#emailSmallText"));
+                    isEmailCheckComplete = false;
+                }
+            });
+
+
+            // Password
+            exceptionInput(passwordId, passwordKeyCodeSet);
+
+            passwordId.bind("focusin keyup", function (e) {
+                checkInput(passwordId,$("#passwordSmallText"),passwordRegex,passwordLength);
+            });
+
+
+            // Check Password
+            let isCheckPasswordComplete = false;
+
+            exceptionInput(checkPasswordId, passwordKeyCodeSet);
+
+            checkPasswordId.bind("focusin keyup", function (e) {
+                isCheckPasswordComplete = checkInput(checkPasswordId,$("#checkPasswordSmallText"),passwordRegex,passwordLength);
+            });
+
+            checkPasswordId.focusout(function () {
+                if(isCheckPasswordComplete) {
+                    checkInputPassword(passwordId, checkPasswordId,$("#checkPasswordSmallText"));
+                    isCheckPasswordComplete = false;
+                }
+            });
+
+
+            // Name
+            exceptionInput(nameId, nameKeyCodeSet);
+
+            nameId.bind("focusin keyup", function (e) {
+                checkInput(nameId,$("#nameSmallText"),nameRegex,nameLength);
+            });
+
+
+            // Tel
+            exceptionInput(telId, telKeyCodeSet);
+
+            telId.bind("focusin keyup", function (e) {
+                checkInput(telId,$("#telSmallText"),telRegex,telLength);
+            });
+
+
+            // Birth
+            $('input[name="birth"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                maxYear: parseInt(moment().format('YYYY'),10)
+            });
+
         });
 
     </script>
