@@ -9,9 +9,14 @@
 <script src="{{ asset("js/member/MemberInfoLength.js") }}"></script>
 <script src="{{ asset("js/member/MemberInputInfo.js") }}"></script>
 
-<script src="js/daterangepicker/daterangepicker.min.js"></script>
-<script src="js/daterangepicker/moment.min.js"></script>
-<link href="css/daterangepicker/daterangepicker.css" rel="stylesheet"/>
+{{--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />--}}
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/daterangepicker/daterangepicker.css" />
 
 @endsection
 
@@ -34,17 +39,32 @@
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control @error('email') border-danger @enderror" id="email" name="email" placeholder="name@example.com" value="{{old('email') ? old('email') : ''}}" required>
                             <label for="email">Email</label>
-                            <small class="text-dark" disabled="disabled" id="emailSmallText"></small>
+                            <small class="text-dark" style="display:none" id="emailSmallText"></small>
                             @error('email')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
+                        </div>
+
+                        <!-- Email Code -->
+                        <div class="row g-2" id="divEmailCode" >
+                            <div class="col-md">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="checkEmail" placeholder="Check Email" required>
+                                    <label for="checkEmail">Email Code</label>
+                                </div>
+                            </div>
+                            <div class="col-md-auto d-grid">
+                                <div class="d-grid">
+                                    <button type="button" class="btn btn-primary btn-lg mb-3" id="sendEmailCodeButton">이메일 전송</button>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Password -->
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control @error('password') border-danger @enderror" id="password" name="password" placeholder="Password" value="{{old('password') ? old('password') : ''}}" required>
                             <label for="password">Password</label>
-                            <small class="text-dark" disabled="disabled" id="passwordSmallText"></small>
+                            <small class="text-dark" style="display:none" id="passwordSmallText"></small>
                             @error('password')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -54,14 +74,14 @@
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="checkPassword" name="checkPassword" placeholder="Check Password" required>
                             <label for="checkPassword">CheckPassword</label>
-                            <small class="text-dark" disabled="disabled" id="checkPasswordSmallText"></small>
+                            <small class="text-dark" style="display:none" id="checkPasswordSmallText"></small>
                         </div>
 
                         <!-- Name -->
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control @error('name') border-danger @enderror" id="name" name="name" placeholder="Name" required value="{{old('name') ? old('name') : ''}}">
                             <label for="name">Name</label>
-                            <small class="text-dark" disabled="disabled" id="nameSmallText"></small>
+                            <small class="text-dark" style="display:none" id="nameSmallText"></small>
                             @error('name')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -71,7 +91,7 @@
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control @error('tel') border-danger @enderror" id="tel" name="tel" placeholder="010-1234-5678" required value="{{old('tel') ? old('tel') : ''}}">
                             <label for="tel">Tel</label>
-                            <small class="text-dark" disabled="disabled" id="telSmallText"></small>
+                            <small class="text-dark" style="display:none" id="telSmallText"></small>
                             @error('tel')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -88,7 +108,7 @@
 
                         <!-- Button-->
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg mb-3">가입하기</button>
+                            <button type="submit" class="btn btn-primary btn-lg mb-3" disabled="disabled" id="buttonCreate">가입하기</button>
                         </div>
                     </form>
                 </div>
@@ -102,26 +122,39 @@
             makeKeycodeSet();
 
             emailId = $("#email");
+            emailCodeId = $("#sendEmailCodeButton");
             passwordId = $("#password");
             checkPasswordId = $("#checkPassword");
             nameId = $("#name");
             telId = $("#tel");
+            birthId = $("#birth");
 
             // 여기 부터 유효성 검사, 입력 방지
             // Email
+            let isEmailValidationComplete = false;
             let isEmailCheckComplete = false;
+            let isPasswordComplete = false;
+            let isNameCheckComplete = false;
+            let isTelCheckComplete = false;
+            let isBirthCheckComplete = false;
 
             exceptionInput(emailId, emailKeyCodeSet);
 
             emailId.bind("focusin keyup", function (e) {
-                isEmailCheckComplete = checkInput(emailId,$("#emailSmallText"),emailRegex,emailLength);
+                isEmailValidationComplete = checkInput(emailId,$("#emailSmallText"),emailRegex,emailLength);
             });
 
             emailId.focusout(function () {
-                if(isEmailCheckComplete) {
-                    checkInputEmail(email,$("#emailSmallText"));
-                    isEmailCheckComplete = false;
+                if(isEmailValidationComplete) {
+                    checkInputEmail(emailId,$("#emailSmallText"));
                 }
+            });
+
+
+            // Email Code
+            emailCodeId.click(function () {
+                console.log("click");
+                sendEmail(emailId);
             });
 
 
@@ -153,7 +186,7 @@
             // Name
             exceptionInput(nameId, nameKeyCodeSet);
 
-            nameId.bind("focusin keyup", function (e) {
+            nameId.bind("focusin keyup", function () {
                 checkInput(nameId,$("#nameSmallText"),nameRegex,nameLength);
             });
 
@@ -167,11 +200,25 @@
 
 
             // Birth
-            $('input[name="birth"]').daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                minYear: 1901,
-                maxYear: parseInt(moment().format('YYYY'),10)
+            birthId.focusin(function (){
+                birthId.daterangepicker({
+                    locale : {
+                        "format" : "YYYY.MM.DD",
+                        "applyLabel" : "확인",
+                        "cancelLabel" : "취소",
+                        "daysOfWeek" : ["일", "월", "화", "수", "목", "금", "토"],
+                        "monthNames" : ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+                    },
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1901,
+                    maxYear: parseInt(moment().format('YYYY'),10),
+                    isCustomDate : function () {
+                        $(".yearselect").css("float", "left");
+                        $(".monthselect").css("float", "right");
+                        $(".cancelBtn").css("float", "right");
+                    }
+                });
             });
 
         });

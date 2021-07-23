@@ -20,6 +20,7 @@ Route::get('/', [MainController::class, 'index' ]);
 Route::prefix('/create-member')->group(function () {
     Route::get('/', [CreateMemberController::class, 'index' ]);
     Route::post('/check-email', [CreateMemberController::class, 'checkEmail']);
+    Route::post('/send-email', [CreateMemberController::class, 'sendEmail']);
     Route::post('/', [CreateMemberController::class, 'create']);
 });
 

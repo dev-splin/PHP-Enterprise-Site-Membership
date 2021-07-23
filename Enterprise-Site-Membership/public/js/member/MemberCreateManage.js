@@ -25,6 +25,7 @@ function checkInput(inputObj, textObj, regex, length) {
 function checkInputEmail(inputObj, textObj) {
 
         let inputValue = inputObj.val();
+        let isPossible = false;
 
         $.ajaxSetup({
             headers: {
@@ -42,17 +43,45 @@ function checkInputEmail(inputObj, textObj) {
                 if (data == '1') {
                     changeClassAndSmallText(inputObj, "form-control border-danger", textObj, "text-danger", "중복된 이메일 입니다.");
                 } else if (data == '0') {
+                    isPossible = true;
+                    console.log(isPossible);
                     changeClassAndSmallText(inputObj, "form-control border-success", textObj, "text-success", "사용 가능한 이메일 입니다.");
                 }
             }
         });
+
+        return isPossible;
+}
+
+function sendEmail(emailObj) {
+
+    let emailValue = emailObj.val();
+    console.log(emailValue);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type : 'POST',
+        data : {
+            email : emailValue
+        },
+        url : "/create-member/send-email",
+        success : function(data) {
+            console.log("success!!");
+            console.log(data);
+        }
+    });
+
+
 }
 
 function checkInputPassword(checkObj, inputObj, textObj) {
     let checkValue = checkObj.val();
-    console.log("check : " + checkValue);
     let inputValue = inputObj.val();
-    console.log("input : " + inputValue);
 
     if(checkValue === inputValue) {
         changeClassAndSmallText(inputObj, "form-control border-success", textObj, "text-success", "비밀번호가 같습니다.");
@@ -74,7 +103,7 @@ function exceptionInput(inputObj, keyCodeSet) {
 function changeClassAndSmallText(inputObj, inputClass, textObj, textClass, Msg) {
     inputObj.attr("class", inputClass);
 
-    textObj.prop("disabled", true);
+    textObj.show();
     textObj.attr("class", textClass);
     textObj.text(Msg);
 }

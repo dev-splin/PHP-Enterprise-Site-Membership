@@ -15,7 +15,6 @@ const telRegex = /^01[016-9]-\d{3,4}-\d{4}/;
 const telKeyCodeSet = new Set();
 
 // Birth
-const birthRegex = /^[a-zA-Z](?:[a-zA-Z0-9]|(?:[-_.][a-zA-Z0-9]+))+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})*/;
 const birthKeyCodeSet = new Set();
 
 
