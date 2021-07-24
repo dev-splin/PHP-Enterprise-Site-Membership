@@ -46,7 +46,7 @@
                         </div>
 
                         <!-- Email Code -->
-                        <div class="row g-2" id="divEmailCode" >
+                        <div class="row g-2" id="divEmailCode" style="display:none">
                             <div class="col-md">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="checkEmail" placeholder="Check Email" required>
@@ -131,9 +131,9 @@
 
             // 여기 부터 유효성 검사, 입력 방지
             // Email
-            let isEmailValidationComplete = false;
+            let isPossibleValidatedEmail = false;
             let isEmailCheckComplete = false;
-            let isPasswordComplete = false;
+            let isPasswordCheckComplete = false;
             let isNameCheckComplete = false;
             let isTelCheckComplete = false;
             let isBirthCheckComplete = false;
@@ -141,19 +141,23 @@
             exceptionInput(emailId, emailKeyCodeSet);
 
             emailId.bind("focusin keyup", function (e) {
-                isEmailValidationComplete = checkInput(emailId,$("#emailSmallText"),emailRegex,emailLength);
+                isPossibleValidatedEmail = checkInput(emailId,$("#emailSmallText"),emailRegex,emailLength);
             });
 
             emailId.focusout(function () {
-                if(isEmailValidationComplete) {
-                    checkInputEmail(emailId,$("#emailSmallText"));
+                if(isPossibleValidatedEmail) {
+                    let isDuplicate = checkInputEmail(emailId,$("#emailSmallText"));
+                    if(isDuplicate == true) {
+                        $("#divEmailCode").hide();
+                    } else {
+                        $("#divEmailCode").show();
+                    }
                 }
             });
 
 
             // Email Code
             emailCodeId.click(function () {
-                console.log("click");
                 sendEmail(emailId);
             });
 

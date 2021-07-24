@@ -25,7 +25,7 @@ function checkInput(inputObj, textObj, regex, length) {
 function checkInputEmail(inputObj, textObj) {
 
         let inputValue = inputObj.val();
-        let isPossible = false;
+        let isDuplicate = true;
 
         $.ajaxSetup({
             headers: {
@@ -38,25 +38,25 @@ function checkInputEmail(inputObj, textObj) {
             data : {
                 email : inputValue
             },
+            async : false,
             url : "/create-member/check-email",
             success : function(data) {
                 if (data == '1') {
                     changeClassAndSmallText(inputObj, "form-control border-danger", textObj, "text-danger", "중복된 이메일 입니다.");
                 } else if (data == '0') {
-                    isPossible = true;
-                    console.log(isPossible);
+                    isDuplicate = false;
                     changeClassAndSmallText(inputObj, "form-control border-success", textObj, "text-success", "사용 가능한 이메일 입니다.");
                 }
             }
         });
 
-        return isPossible;
+        return isDuplicate;
 }
 
 function sendEmail(emailObj) {
 
     let emailValue = emailObj.val();
-    console.log(emailValue);
+    let isCheck = true;
 
     $.ajaxSetup({
         headers: {
@@ -76,7 +76,7 @@ function sendEmail(emailObj) {
         }
     });
 
-
+    return isCheck;
 }
 
 function checkInputPassword(checkObj, inputObj, textObj) {

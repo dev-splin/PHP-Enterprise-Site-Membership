@@ -1,7 +1,7 @@
 CREATE TABLE member (
     mem_idx INT NOT NULL AUTO_INCREMENT COMMENT '사용자 인덱스',
     mem_email VARCHAR(256) NOT NULL COMMENT '이메일(로그인 id 겸용)',
-    mem_pw VARCHAR(20) NOT NULL COMMENT '비밀번호',
+    mem_pw VARCHAR(256) NOT NULL COMMENT '비밀번호',
     mem_name VARCHAR(20) NOT NULL COMMENT '이름',
     mem_tel VARCHAR(13) NOT NULL COMMENT '전화번호',
     mem_birth DATE NOT NULL COMMENT '생년월일',
@@ -40,7 +40,7 @@ CREATE TABLE member_active_log (
 CREATE TABLE admin (
     admin_idx INT NOT NULL AUTO_INCREMENT COMMENT '관리자 인덱스',
     admin_id VARCHAR(20) NOT NULL COMMENT '로그인 id',
-    admin_pw VARCHAR(20) NOT NULL COMMENT '비밀번호',
+    admin_pw VARCHAR(256) NOT NULL COMMENT '비밀번호',
     admin_name VARCHAR(20) NOT NULL COMMENT '이름',
     admin_tel VARCHAR(13) NULL COMMENT '전화번호',
     admin_email VARCHAR(256) NOT NULL COMMENT '이메일',

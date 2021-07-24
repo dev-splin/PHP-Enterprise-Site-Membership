@@ -16,7 +16,14 @@ class CreateMemberController extends Controller
 
     public function sendEmail() {
 
-        Http::asForm()->post("http://crm3.saramin.co.kr/mail_api/automails",
+        $collection = collect([0,1,2,3,4,5,6,7,8,9]);
+        $shuffled = $collection->shuffle()->skip(4)->implode("");
+
+        echo $shuffled;
+
+
+
+        /*Http::asForm()->post("http://crm3.saramin.co.kr/mail_api/automails",
             [
             'autotype'=>'A0264',
             'cmpncode'=>'13523',
@@ -26,7 +33,7 @@ class CreateMemberController extends Controller
             'replace15'=>'안녕하세요 테스트 이메일입니다.',
             'title'=>'테스트중입니다.'
             ]
-        );
+        );*/
     }
 
     public function checkEmail() {
