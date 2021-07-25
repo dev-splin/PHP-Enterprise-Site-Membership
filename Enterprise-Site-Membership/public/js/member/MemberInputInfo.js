@@ -1,6 +1,7 @@
 // Email
 const emailRegex = /^[a-zA-Z](?:[a-zA-Z0-9]|(?:[-_.][a-zA-Z0-9]+))+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})*/;
 const emailKeyCodeSet = new Set();
+const emailCodeKeyCodeSet = new Set();
 
 // Password
 const passwordRegex = /[a-zA-Z0-9]+[!@#$%^&*()]+(?:[a-zA-Z0-9]+[!@#$%^&*()]*)*/;
@@ -16,8 +17,6 @@ const telKeyCodeSet = new Set();
 
 // Birth
 const birthKeyCodeSet = new Set();
-
-
 
 
 // Keycode Set 생성(
@@ -56,6 +55,7 @@ function makeKeycodeSet() {
     // 0 ~ 9
     for (let i = 48; i <= 57; ++i) {
         emailKeyCodeSet.add(i);
+        emailCodeKeyCodeSet.add(i);
         passwordKeyCodeSet.add(i);
         telKeyCodeSet.add(i);
     }

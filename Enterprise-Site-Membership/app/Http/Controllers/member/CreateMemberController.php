@@ -14,28 +14,28 @@ class CreateMemberController extends Controller
         return view('member/CreateMember');
     }
 
+    // 이메일 코드 전송
     public function sendEmail() {
 
         $collection = collect([0,1,2,3,4,5,6,7,8,9]);
         $shuffled = $collection->shuffle()->skip(4)->implode("");
 
-        echo $shuffled;
-
-
-
-        /*Http::asForm()->post("http://crm3.saramin.co.kr/mail_api/automails",
+        Http::asForm()->post("http://crm3.saramin.co.kr/mail_api/automails",
             [
             'autotype'=>'A0264',
             'cmpncode'=>'13523',
-            'email'=>'ychyun@saramin.co.kr',
+            'email'=>request('email'),
             'sender_email'=>'ychyun@saramin.co.kr',
             'use_event_solution'=>'y',
-            'replace15'=>'안녕하세요 테스트 이메일입니다.',
-            'title'=>'테스트중입니다.'
+            'replace15'=>'이메일 인증 코드 : ' + $shuffled,
+            'title'=>'이메일 인증 코드 입니다.'
             ]
-        );*/
+        );
+
+        return $shuffled;
     }
 
+    // 이메일 중복 확인
     public function checkEmail() {
 
         $email = member::where('mem_email', request('email'))
@@ -44,6 +44,7 @@ class CreateMemberController extends Controller
         return $email;
     }
 
+    // 사용자 생성
     public function create() {
 
         request()->validate([

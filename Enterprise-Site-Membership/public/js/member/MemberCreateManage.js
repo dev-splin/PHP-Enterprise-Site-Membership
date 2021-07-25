@@ -1,5 +1,4 @@
-
-
+// 입력 확인
 function checkInput(inputObj, textObj, regex, length) {
 
     let isPossible = true;
@@ -22,6 +21,7 @@ function checkInput(inputObj, textObj, regex, length) {
     return isPossible;
 }
 
+// 중복 이메일 체크
 function checkInputEmail(inputObj, textObj) {
 
         let inputValue = inputObj.val();
@@ -53,10 +53,11 @@ function checkInputEmail(inputObj, textObj) {
         return isDuplicate;
 }
 
+// 이메일 코드 전송
 function sendEmail(emailObj) {
 
     let emailValue = emailObj.val();
-    let isCheck = true;
+    let result;
 
     $.ajaxSetup({
         headers: {
@@ -66,32 +67,40 @@ function sendEmail(emailObj) {
 
     $.ajax({
         type : 'POST',
+        async : false,
         data : {
             email : emailValue
         },
         url : "/create-member/send-email",
         success : function(data) {
-            console.log("success!!");
-            console.log(data);
+            result = data;
         }
     });
 
-    return isCheck;
+    return result;
 }
 
+// 비밀번호 확인
 function checkInputPassword(checkObj, inputObj, textObj) {
     let checkValue = checkObj.val();
     let inputValue = inputObj.val();
 
+    let isSame = false;
+
     if(checkValue === inputValue) {
+        isSame = true;
         changeClassAndSmallText(inputObj, "form-control border-success", textObj, "text-success", "비밀번호가 같습니다.");
     } else {
+        isSame = false;
         changeClassAndSmallText(inputObj, "form-control border-danger", textObj, "text-danger", "비밀번호가 다릅니다.");
     }
+
+    return isSame;
 }
 
+// 입력 방지
 function exceptionInput(inputObj, keyCodeSet) {
-    inputObj.keypress(function (){
+    inputObj.keypress(function (event){
        var keyCode =  event.keyCode;
 
        if(!keyCodeSet.has(keyCode))
@@ -99,7 +108,7 @@ function exceptionInput(inputObj, keyCodeSet) {
     });
 }
 
-
+// class와 small(text) 바꾸기
 function changeClassAndSmallText(inputObj, inputClass, textObj, textClass, Msg) {
     inputObj.attr("class", inputClass);
 
@@ -108,7 +117,7 @@ function changeClassAndSmallText(inputObj, inputClass, textObj, textClass, Msg) 
     textObj.text(Msg);
 }
 
-
+// 입력 제한 길이 확인
 function isPossibleLength(inputObj, length) {
     let inputValue =  inputObj.val();
 
@@ -119,7 +128,7 @@ function isPossibleLength(inputObj, length) {
     return true;
 }
 
-
+// 유효성 검사
 function isValidation(inputed, regex) {
 
     if(regex.test(inputed)) {
