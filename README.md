@@ -1,6 +1,8 @@
 # 1️⃣ 엔터프라이즈급 사이트 멤버쉽 구성
 
-가장 기본적이지만 민감하고 중요한 회원정보의 암호화 방법, 인증 방법, 유효성 검사, 휴면 정책 등을 PHP로 경험해보고 확장성있고 더 효율적인 방법을 찾아보면서 PHP와 웹에 익숙해 지기 위한 프로젝트입니다.
+가장 기본적이지만 민감하고 중요한 회원정보의 암호화 방법, 인증 방법, 유효성 검사, 휴면 정책 등을 PHP로 경험해보고 확장성있고 더 효율적인 방법을 찾아보면서 PHP와 웹에 익숙해 지기 위한 프로젝트입니다. 
+
+**코드는 공개하기 어렵기 때문에 업데이트 중단**
 
 
 
@@ -60,19 +62,19 @@
 
 #### 사용자
 
-<img src="https://user-images.githubusercontent.com/79291114/126042373-4ee38f61-982a-463e-abfe-e6d24a1d6ab0.png" alt="UserFlow" style="zoom: 67%;" />
+<img src="https://user-images.githubusercontent.com/79291114/130322764-2ea6e118-0d08-417f-ab5e-a1d2ffba7d57.png" alt="UserFlow" style="zoom:80%;" />
 
 
 
 #### 관리자
 
-<img src="https://user-images.githubusercontent.com/79291114/126042369-8e687a45-ad0c-416c-84d8-7d4881849e82.png" alt="AdminFlow" style="zoom:67%;" />
+<img src="https://user-images.githubusercontent.com/79291114/130322742-eb1c88b3-9fa6-4bd7-be86-c8e4b1dac1c7.png" alt="ChangeAdminFlow" style="zoom:80%;" />
 
 
 
 ### 데이터 베이스 설계도
 
-![DB-blueprint_white](https://user-images.githubusercontent.com/79291114/126338935-595f150f-f47a-4b5e-880c-8ef343727572.png)
+<img src="https://user-images.githubusercontent.com/79291114/130322705-615c46b9-f6f7-4751-bd8b-d399608b0717.png" alt="change-DB-blueprint_white" style="zoom:80%;" />
 
 
 

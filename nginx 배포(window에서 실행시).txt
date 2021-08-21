@@ -1,0 +1,90 @@
+nginx 배포(window에서 실행시)
+ - nginx 설치
+   http://nginx.org/en/download.html
+   Stable version의 nginx/Windows-X.XX.X 설치
+
+ - 서버 동작 원리
+   php-cgi가 php 파일 컴파일 -> nginx가 정적 파일 배포
+   결론 : php-cgi 실행이 먼저 되어야 함
+
+ - cmd 창에서 백그라운드로 php-cgi.exe 실행
+   cd C:\php7
+   php-cgi.exe -b 127.0.0.1:9000
+
+ - nginx 설정
+   ex)C:\nginx\1.20.1\conf\nginx.conf
+    server {
+	listen 80;
+	server_name localhost;
+	root C://Users/user/Desktop/laravel/blog/public;
+
+	add_header X-Frame-Options "SAMEORIGIN";
+	add_header X-XSS-Protection "1; mode=block";
+	add_header X-Content-Type-Options "nosniff";
+
+	index index.php;
+
+	charset utf-8;
+
+	location / {
+		try_files $uri $uri/ /index.php?$query_string;
+	}
+
+	location = /favicon.ico { access_log off; log_not_found off; }
+	location = /robots.txt { access_log off; log_not_found off; }
+
+	error_page 404 /index.php;
+
+	location ~ \.php$ {
+		try_files $uri /index.php = 404;
+		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		include fastcgi_params;
+	}
+
+	location ~ /\.(?!well-known).* {
+		deny all;
+	}
+    }
+
+ - nginx 실행
+   cd C:\nginx\1.20.1
+   nginx
+
+ - 에러 확인
+   C:\nginx\1.20.1\logs\error.log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

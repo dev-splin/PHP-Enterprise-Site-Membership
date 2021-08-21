@@ -144,6 +144,7 @@
 
             // 입력 방지
             exceptionInput(emailId, emailKeyCodeSet);
+            hangeulExceptionInput(emailId);
 
             // 유효성 검사
             emailId.bind("focusin keyup", function (e) {
@@ -179,6 +180,7 @@
 
             // 입력 방지
             exceptionInput(checkEmailCodeId, emailCodeKeyCodeSet);
+            hangeulExceptionInput(checkEmailCodeId);
 
             // 이메일 코드 확인, 모든 입력 완료 유무 확인
             checkEmailCodeId.focusout(function () {
@@ -198,6 +200,7 @@
 
             // 입력 방지
             exceptionInput(passwordId, passwordKeyCodeSet);
+            hangeulExceptionInput(passwordId);
 
             // 유효성 검사
             passwordId.bind("focusin keyup", function (e) {
@@ -222,6 +225,7 @@
 
             // 입력 방지
             exceptionInput(checkPasswordId, passwordKeyCodeSet);
+            hangeulExceptionInput(checkPasswordId);
 
             // 유효성 검사
             checkPasswordId.bind("focusin keyup", function (e) {
@@ -273,6 +277,7 @@
 
             // 입력 방지
             exceptionInput(telId, telKeyCodeSet);
+            hangeulExceptionInput(telId);
 
             // 유효성 검사
             telId.bind("focusin keyup", function (e) {
@@ -293,6 +298,7 @@
             // Birth
             // 입력 방지
             exceptionInput(birthId, birthKeyCodeSet);
+            hangeulExceptionInput(birthId);
 
             // 날짜 선택
             birthId.focusin(function (){

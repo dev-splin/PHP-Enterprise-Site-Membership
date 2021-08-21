@@ -1,9 +1,9 @@
 CREATE TABLE member (
     mem_idx INT NOT NULL AUTO_INCREMENT COMMENT '사용자 인덱스',
-    mem_email VARCHAR(256) NOT NULL COMMENT '이메일(로그인 id 겸용)',
+    mem_email VARCHAR(60) NOT NULL COMMENT '이메일(로그인 id 겸용)',
     mem_pw VARCHAR(256) NOT NULL COMMENT '비밀번호',
     mem_name VARCHAR(20) NOT NULL COMMENT '이름',
-    mem_tel VARCHAR(13) NOT NULL COMMENT '전화번호',
+    mem_tel VARCHAR(256) NOT NULL COMMENT '전화번호',
     mem_birth DATE NOT NULL COMMENT '생년월일',
     mem_create_dt TIMESTAMP NOT NULL COMMENT '가입일',
     mem_update_dt TIMESTAMP NOT NULL COMMENT '정보 변경일',
@@ -42,7 +42,7 @@ CREATE TABLE admin (
     admin_id VARCHAR(20) NOT NULL COMMENT '로그인 id',
     admin_pw VARCHAR(256) NOT NULL COMMENT '비밀번호',
     admin_name VARCHAR(20) NOT NULL COMMENT '이름',
-    admin_tel VARCHAR(13) NULL COMMENT '전화번호',
-    admin_email VARCHAR(256) NOT NULL COMMENT '이메일',
+    admin_tel VARCHAR(256) NULL COMMENT '전화번호',
+    admin_email VARCHAR(60) NOT NULL COMMENT '이메일',
     PRIMARY KEY(admin_idx)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

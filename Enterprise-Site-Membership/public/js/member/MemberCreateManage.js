@@ -100,11 +100,22 @@ function checkInputPassword(checkObj, inputObj, textObj) {
 
 // 입력 방지
 function exceptionInput(inputObj, keyCodeSet) {
-    inputObj.keypress(function (event){
-       var keyCode =  event.keyCode;
+
+    inputObj.keypress(function (){
+       let keyCode =  event.keyCode;
 
        if(!keyCodeSet.has(keyCode))
            event.returnValue = false;
+    });
+}
+
+function hangeulExceptionInput(inputObj) {
+    let regex = /[ㄱ-ㅎ가-힣]+/;
+    inputObj.keyup(function (){
+        let inputValue = inputObj.val();
+        if(regex.test(inputValue)) {
+            inputObj.val(inputValue.replace(regex,""));
+        }
     });
 }
 

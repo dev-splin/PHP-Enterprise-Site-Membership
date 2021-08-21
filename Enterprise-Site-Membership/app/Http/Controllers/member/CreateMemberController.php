@@ -27,8 +27,8 @@ class CreateMemberController extends Controller
             'email'=>request('email'),
             'sender_email'=>'ychyun@saramin.co.kr',
             'use_event_solution'=>'y',
-            'replace15'=>'이메일 인증 코드 : ' + $shuffled,
-            'title'=>'이메일 인증 코드 입니다.'
+            'replace15'=>'회원 가입 이메일 인증 코드 : ' + $shuffled,
+            'title'=>'회원 가입 이메일 인증 코드 입니다.'
             ]
         );
 
@@ -59,7 +59,7 @@ class CreateMemberController extends Controller
         $member->mem_email = request('email');
         $member->mem_pw = Crypt::encryptString(request('password'));
         $member->mem_name = request('name');
-        $member->mem_tel = request('tel');
+        $member->mem_tel = Crypt::encryptString(request('tel'));
         $member->mem_birth = request('birth');
         $member->stat_idx = 1;
         $member->mem_update_pw_dt = now();
